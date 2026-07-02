@@ -7,7 +7,7 @@ from app.models import MAC
 from django.shortcuts import render, redirect
 from .models import MAC
 
-def home(request):
+def index(request):
     if request.method == "POST":
         MAC.objects.create(
             nimi=request.POST.get("nimi"),
