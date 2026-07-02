@@ -96,7 +96,7 @@
 
             {% csrf_token %}
 
-            <input type="text" name="nimi" value="{{mac.nimi}}" required>
+            <input type="text" name="nomi" value="{{mac.nomi}}" required>
 
             <input type="number" step="0.01" name="narxi" value="{{mac.narxi}}" required>
 
@@ -106,7 +106,7 @@
                 💾 Saqlash
             </button>
 
-        </form>
+        </form>                                 
 
         <a href="{% url 'index' %}">
             ⬅ Orqaga

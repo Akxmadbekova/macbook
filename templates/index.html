@@ -152,7 +152,7 @@
             <form method="POST">
                 {% csrf_token %}
 
-                <input type="text" name="nimi" placeholder="Mac nomi" required>
+                <input type="text" name="nomi" placeholder="Mac nomi" required>
 
                 <input type="number" step="0.01" name="narxi" placeholder="Narxi" required>
 
@@ -174,7 +174,7 @@
 
                 <div class="info">
 
-                    <h2>{{mac.nimi}}</h2>
+                    <h2>{{mac.nomi}}</h2>
 
                     <div class="price">
                         ${{mac.narxi}}

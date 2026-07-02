@@ -1,8 +1,9 @@
 from django.urls import path
-from . import views
+from app.views import index, update, delete
 
 urlpatterns = [
-    path("", views.index, name="index"),
-    path("update/<int:id>/", views.update, name="update"),
-    path("delete/<int:id>/", views.delete, name="delete"),  # delete view yozishingiz kerak
+    path("", index, name="index"),
+    path("update/<int:id>/",update, name="update"),
+    path("delete/<int:id>/",delete, name="delete"),  # delete view yozishingiz kerak
 ]
+
