@@ -1,6 +1,7 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import MAC
+from .models import iphone
 
 def index(request):
     if request.method == "POST":
