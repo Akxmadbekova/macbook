@@ -57,3 +57,25 @@ def iphone_store(request):
     iphones = iphone.objects.all()
     
     return render(request, 'iphone.html', {'iphones': iphones})
+
+
+
+# 2. TAHRIRLASH (Update)
+def update_iphone(request, pk):
+    phone = get_object_or_404(iphone, pk=pk) # ID bo'yicha telefonni topish
+    
+    if request.method == "POST":
+        phone.nomi = request.POST.get('nomi')
+        phone.narxi = request.POST.get('narxi')
+        phone.image_url = request.POST.get('image_url')
+        phone.save() # O'zgarishlarni saqlash
+        return redirect('iphone_store')
+        
+    return render(request, 'update_uphone.html', {'phone': phone})
+
+
+# 3. O'CHIRISH (Delete)
+def delete_iphone(request, pk):
+    phone = get_object_or_404(iphone, pk=pk)
+    phone.delete() # Bazadan o'chirish
+    return redirect('iphone_store') 

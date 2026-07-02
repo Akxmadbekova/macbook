@@ -4,141 +4,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iPhone Store</title>
+    <title>Premium iPhone Store</title>
 
     <style>
+        /* 1. Global stillar va Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Segoe UI, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
-            padding: 40px;
+            background: linear-gradient(135deg, #090d16, #111827, #1f2937);
+            color: #f3f4f6;
+            padding: 50px 20px;
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
         }
 
         .container {
-            width: 95%;
-            max-width: 1300px;
+            width: 100%;
+            max-width: 1200px;
             margin: auto;
         }
 
+        /* 2. Sarlavha dizayni */
         h1 {
             text-align: center;
-            color: white;
-            font-size: 42px;
-            margin-bottom: 35px;
+            font-size: 46px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #ffffff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
+        /* 3. Professional Forma dizayni (Glassmorphism effektida) */
         .form-box {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, .3);
-            margin-bottom: 45px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 35px;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            margin-bottom: 50px;
+        }
+
+        .form-box form {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            align-items: end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #9ca3af;
+            padding-left: 4px;
         }
 
         .form-box input {
             width: 100%;
-            padding: 15px;
-            margin: 12px 0;
-            border: none;
-            background: #eef2f7;
-            border-radius: 12px;
+            padding: 16px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(17, 24, 39, 0.6);
+            border-radius: 14px;
             font-size: 16px;
+            color: white;
+            transition: all 0.3s ease;
         }
 
         .form-box input:focus {
             outline: none;
-            border: 2px solid royalblue;
+            border-color: #3b82f6;
+            background: rgba(17, 24, 39, 0.9);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
         }
 
         .form-box button {
-            width: 100%;
-            padding: 15px;
+            grid-column: span 3;
+            /* Tugma pastdan to'liq eniga chiqishi uchun */
+            padding: 16px;
             border: none;
-            border-radius: 12px;
-            background: linear-gradient(45deg, #2563eb, #06b6d4);
+            border-radius: 14px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
-            font-size: 18px;
+            font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
-            transition: .3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
         }
 
         .form-box button:hover {
-            transform: scale(1.02);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(37, 99, 235, 0.4);
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
         }
 
+        /* 4. Kartochkalar (Cards Grid) */
         .cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
         .card {
-            background: white;
-            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, .25);
-            transition: .4s;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
             transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        /* Rasm konteyneri va tuzatilgan to'liq ko'rinish */
+        .image-container {
+            background: #ffffff;
+            /* iPhone rasmlari asosan oq fonda bo'lgani uchun */
+            padding: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 260px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .card img {
-            width: 100%;
-            height: 230px;
-            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            /* Rasm qirqilmaydi, to'liq ko'rinadi */
+            transition: transform 0.4s ease;
         }
 
+        .card:hover img {
+            transform: scale(1.05);
+            /* Sichqoncha kelganda rasm biroz yaqinlashadi */
+        }
+
+        /* 5. Kartochka ichidagi matnlar */
         .info {
-            padding: 20px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .info h2 {
-            margin-bottom: 10px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /* Nom juda uzun bo'lsa, chiroyli qisqartiradi */
         }
 
         .price {
-            color: #16a34a;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 15px;
+            color: #10b981;
+            /* Premium yashil rang */
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 20px;
         }
 
+        /* Action Tugmalar */
         .buttons {
             display: flex;
-            justify-content: space-between;
+            gap: 12px;
+            margin-top: auto;
+            /* Tugmalarni har doim pastga tekislaydi */
         }
 
         .buttons a {
+            flex: 1;
             text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 8px;
-            color: white;
-            font-weight: bold;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.2s ease;
         }
 
         .edit {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .edit:hover {
             background: #2563eb;
+            color: white;
+            border-color: #2563eb;
         }
 
         .delete {
-            background: #dc2626;
+            background: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.2);
         }
 
-        .empty {
+        .delete:hover {
+            background: #dc2626;
             color: white;
+            border-color: #dc2626;
+        }
+
+        /* Bo'sh holat */
+        .empty {
+            grid-column: 1 / -1;
+            color: #9ca3af;
             text-align: center;
-            font-size: 25px;
+            padding: 60px;
+            font-size: 18px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        /* 6. Mobil qurilmalar uchun moslashuvchanlik (Responsive) */
+        @media (max-width: 768px) {
+            .form-box form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-box button {
+                grid-column: span 1;
+            }
+
+            body {
+                padding: 20px 10px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
         }
     </style>
-
 </head>
 
 <body>
@@ -149,13 +273,24 @@
 
         <div class="form-box">
             <form method="POST">
-                {% csrf_token %} <input type="text" name="nomi" placeholder="iPhone modeli nomi" required>
+                {% csrf_token %}
 
-                <input type="number" step="0.01" name="narxi" placeholder="Narxi ($)" required>
+                <div class="form-group">
+                    <label>iPhone Modeli</label>
+                    <input type="text" name="nomi" placeholder="Masalan: iPhone 15 Pro" required>
+                </div>
 
-                <input type="url" name="image_url" placeholder="Rasm URL manzili" required>
+                <div class="form-group">
+                    <label>Narxi ($)</label>
+                    <input type="number" step="0.01" name="narxi" placeholder="Masalan: 1099.99" required>
+                </div>
 
-                <button type="submit">➕ Qo'shish</button>
+                <div class="form-group">
+                    <label>Rasm URL Manzili</label>
+                    <input type="url" name="image_url" placeholder="https://example.com/image.jpg" required>
+                </div>
+
+                <button type="submit">➕ Yangi iPhone Qo'shish</button>
             </form>
         </div>
 
@@ -163,24 +298,27 @@
 
             {% for phone in iphones %}
             <div class="card">
-                <img src="{{ phone.image_url }}" alt="{{ phone.nomi }}">
+                <div class="image-container">
+                    <img src="{{ phone.image_url }}" alt="{{ phone.nomi }}">
+                </div>
 
                 <div class="info">
                     <h2>{{ phone.nomi }}</h2>
-
-                    <div class="price">
-                        ${{ phone.narxi }}
-                    </div>
+                    <div class="price">${{ phone.narxi }}</div>
 
                     <div class="buttons">
-                        <a href="#" class="edit">✏ Tahrirlash</a>
-                        <a href="#" class="delete">🗑 O'chirish</a>
+                        <a href="{% url 'update_iphone' phone.id %}" class="edit">✏ Tahrirlash</a>
+
+                        <a href="{% url 'delete_iphone' phone.id %}" class="delete"
+                            onclick="return confirm('Haqiqatan ham ushbu iPhone-ni o\'chirmoqchimisiz?')">
+                            🗑 O'chirish
+                        </a>
                     </div>
                 </div>
             </div>
             {% empty %}
             <div class="empty">
-                Hozircha iPhone do'konida telefonlar mavjud emas.
+                📭 Do'konda hozircha iPhone modellari mavjud emas.
             </div>
             {% endfor %}
 
@@ -189,4 +327,5 @@
     </div>
 
 </body>
+
 </html>

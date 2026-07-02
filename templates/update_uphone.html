@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahrirlash</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        body {
+            background: linear-gradient(135deg, #090d16, #111827, #1f2937);
+            color: #f3f4f6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .box {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 40px;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+        h2 { text-align: center; margin-bottom: 25px; }
+        .group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+        label { font-size: 14px; color: #9ca3af; }
+        input {
+            width: 100%; padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(17, 24, 39, 0.6);
+            border-radius: 12px; color: white; font-size: 16px;
+        }
+        input:focus { outline: none; border-color: #3b82f6; }
+        .btn-save {
+            width: 100%; padding: 15px; border: none; border-radius: 12px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white; font-size: 16px; font-weight: bold; cursor: pointer;
+        }
+        .btn-cancel {
+            display: block; text-align: center; text-decoration: none;
+            color: #9ca3af; margin-top: 15px; font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h2>✏ Ma'lumotni tahrirlash</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="group">
+                <label>iPhone Modeli</label>
+                <input type="text" name="nomi" value="{{ phone.nomi }}" required>
+            </div>
+            <div class="group">
+                <label>Narxi ($)</label>
+                <input type="number" step="0.01" name="narxi" value="{{ phone.narxi }}" required>
+            </div>
+            <div class="group">
+                <label>Rasm URL</label>
+                <input type="url" name="image_url" value="{{ phone.image_url }}" required>
+            </div>
+            <button type="submit" class="btn-save">💾 Saqlash</button>
+            <a href="{% url 'iphone_store' %}" class="btn-cancel">Bekor qilish</a>
+        </form>
+    </div>
+
+</body>
+</html>
